@@ -8,38 +8,43 @@ public class TestTri {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Taille du tableau : ");
-		int n = sc.nextInt();
-		int tab1[] = new int[n];
-		int tab2[] = new int[2*n];
-		int tab3[] = new int[3*n];
-		int tab5[] = new int[5*n];
-		int tab7[] = new int[7*n];
-		int tab10[] = new int[10*n];
-		int tab100[] = new int[100*n];
-		Random random = new Random();
+		int c = -1;
 		
-		for (int i=0; i<tab1.length; i++) tab1[i] = random.nextInt(Integer.MAX_VALUE);
-		for (int i=0; i<tab2.length; i++) tab2[i] = random.nextInt(Integer.MAX_VALUE);
-		for (int i=0; i<tab3.length; i++) tab3[i] = random.nextInt(Integer.MAX_VALUE);
-		for (int i=0; i<tab5.length; i++) tab5[i] = random.nextInt(Integer.MAX_VALUE);
-		for (int i=0; i<tab7.length; i++) tab7[i] = random.nextInt(Integer.MAX_VALUE);
-		for (int i=0; i<tab10.length; i++) tab10[i] = random.nextInt(Integer.MAX_VALUE);
-		for (int i=0; i<tab100.length; i++) tab100[i] = random.nextInt(Integer.MAX_VALUE);
-		
-		System.out.println("Choix de l'algorithme à tester :");
-		System.out.println("\t1 - Tri par fusion");
-		System.out.println("\t2 - Tri par bulles");
-		System.out.println("\t3 - QuickSort");
-		System.out.println("\t4 - QuickSort Random");
-		System.out.println("\t5 - Tri par insertion");
-		System.out.println("\t6 - Tri par tas");
-		System.out.println("\t7 - Tri par base");
-		System.out.println("\t8 - Arrays.sort()");
-		System.out.println("\t0 - Quitter");
-		int c = sc.nextInt();
-		
-		if (c > 0 && c < 9) {
+		while (c != 0) {
+			System.out.println("Choix de l'algorithme à tester :");
+			System.out.println("\t1 - Tri par fusion");
+			System.out.println("\t2 - Tri par bulles");
+			System.out.println("\t3 - QuickSort");
+			System.out.println("\t4 - QuickSort Random");
+			System.out.println("\t5 - Tri par insertion");
+			System.out.println("\t6 - Tri par tas");
+			System.out.println("\t7 - Tri par base");
+			System.out.println("\t8 - Arrays.sort()");
+			System.out.println("\t0 - Quitter");
+			c = sc.nextInt();
+			if (c == 0) break;
+			else if (c <= 0 || c >= 9) continue;
+			
+			System.out.println("Taille du tableau : ");
+			int n = sc.nextInt();
+			int tab1[] = new int[n];
+			int tab2[] = new int[2*n];
+			int tab3[] = new int[3*n];
+			int tab5[] = new int[5*n];
+			int tab7[] = new int[7*n];
+			int tab10[] = new int[10*n];
+			int tab100[] = new int[100*n];
+			Random random = new Random();
+			
+			int max_val = (c == 7) ? 1400000000 : Integer.MAX_VALUE; // Integer.MAX_VALUE est trop grand pour le tri par base
+			for (int i=0; i<tab1.length; i++) tab1[i] = random.nextInt(max_val);
+			for (int i=0; i<tab2.length; i++) tab2[i] = random.nextInt(max_val);
+			for (int i=0; i<tab3.length; i++) tab3[i] = random.nextInt(max_val);
+			for (int i=0; i<tab5.length; i++) tab5[i] = random.nextInt(max_val);
+			for (int i=0; i<tab7.length; i++) tab7[i] = random.nextInt(max_val);
+			for (int i=0; i<tab10.length; i++) tab10[i] = random.nextInt(max_val);
+			for (int i=0; i<tab100.length; i++) tab100[i] = random.nextInt(max_val);
+			
 			System.out.println("\nDébut des tests : ");
 			long resultatsN = 0;
 			for (int i=0; i<10; i++) {
@@ -141,6 +146,7 @@ public class TestTri {
 				resultats100NtrieInverse += (fin-debut);
 			}
 			System.out.println("Résultats pour 100n trié inversé : " + resultats100NtrieInverse/10);
+			System.out.println();
 		}		
 	}
 	
