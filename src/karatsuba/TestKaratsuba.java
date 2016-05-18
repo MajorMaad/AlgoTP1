@@ -2,26 +2,38 @@ package karatsuba;
 
 import java.math.BigInteger;
 import java.util.Random;
+import java.util.Scanner;
 
 public class TestKaratsuba {
 	
 	public static void main(String[] args) {
-		long start, stop;
+		long debut, fin;
 		Random r = new Random();
-		BigInteger a = new BigInteger(1000000, r);
-		BigInteger b = new BigInteger(1000000, r);
+		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Nombre de chiffres de a et b : 301 030");
+		System.out.println("Combien de bits pour a et b ? (tests réalisé avec 1 000 000)");
+		int nbBits = sc.nextInt();
 		
-        start = System.currentTimeMillis(); 
-        BigInteger c = Karatsuba.karatsuba(a, b);
-        stop = System.currentTimeMillis();
-        System.out.println("Temps Karatsuba : " + (stop - start) + "ms");
+		BigInteger a = new BigInteger(nbBits, r);
+		BigInteger b = new BigInteger(nbBits, r);
+		
+		System.out.println("Nombre de chiffres de a et b : " + a.toString().length());
 
-        start = System.currentTimeMillis(); 
-        BigInteger d = a.multiply(b);
-        stop = System.currentTimeMillis();
-        System.out.println("Temps multiplication classique : " + (stop - start) + "ms");
+		long tpsKara = 0;
+		long tpsNorm = 0;
+		for (int i=0; i<10; i++) {
+	        debut = System.currentTimeMillis(); 
+	        BigInteger c = Karatsuba.karatsuba(a, b);
+	        fin = System.currentTimeMillis();
+	        tpsKara += (fin - debut);
+	
+	        debut = System.currentTimeMillis(); 
+	        BigInteger d = a.multiply(b);
+	        fin = System.currentTimeMillis();
+	        tpsNorm += (fin - debut);
+		}
+		System.out.println("Temps Karatsuba : " + tpsKara/10 + "ms");
+        System.out.println("Temps multiplication classique : " + tpsNorm/10 + "ms");
 	}
 	
 }
